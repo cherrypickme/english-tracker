@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}{{ topic.title }} — English Learning Tracker{% endblock %}
+
+{% block content %}
+<h1>{{ topic.title }}</h1>
+{% if topic.created_at %}
+<p class="meta">Created {{ topic.created_at.strftime("%Y-%m-%d %H:%M") }}</p>
+{% endif %}
+
+<p><a href="/topics/{{ topic.id }}/edit" class="btn">Edit</a>
+   <a href="/topics" class="btn-secondary">Back to list</a></p>
+
+<section>
+    <h2>Theory</h2>
+    {% if topic.theory %}
+    <pre class="content">{{ topic.theory }}</pre>
+    {% else %}
+    <p class="empty">No theory yet.</p>
+    {% endif %}
+</section>
+
+<section>
+    <h2>Prompt</h2>
+    {% if topic.prompt %}
+    <pre class="content">{{ topic.prompt }}</pre>
+    {% else %}
+    <p class="empty">No prompt yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

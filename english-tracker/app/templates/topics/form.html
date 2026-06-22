@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{% if topic %}Edit{% else %}New{% endif %} Topic — English Learning Tracker{% endblock %}
+
+{% block content %}
+<h1>{% if topic %}Edit topic{% else %}New topic{% endif %}</h1>
+
+<form method="post" action="{{ form_action }}" class="form">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" value="{{ topic.title if topic else '' }}" required>
+
+    <label for="theory">Theory</label>
+    <textarea id="theory" name="theory" rows="10">{{ topic.theory if topic and topic.theory else '' }}</textarea>
+
+    <label for="prompt">Prompt</label>
+    <textarea id="prompt" name="prompt" rows="6">{{ topic.prompt if topic and topic.prompt else '' }}</textarea>
+
+    <div class="form-actions">
+        <button type="submit" class="btn">Save</button>
+        {% if topic %}
+        <a href="/topics/{{ topic.id }}" class="btn-secondary">Cancel</a>
+        {% else %}
+        <a href="/topics" class="btn-secondary">Cancel</a>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

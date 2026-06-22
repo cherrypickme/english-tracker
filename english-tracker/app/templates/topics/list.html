@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Topics — English Learning Tracker{% endblock %}
+
+{% block content %}
+<h1>Topics</h1>
+<p><a href="/topics/new" class="btn">New topic</a></p>
+
+{% if topics %}
+<ul class="topic-list">
+    {% for topic in topics %}
+    <li>
+        <a href="/topics/{{ topic.id }}">{{ topic.title }}</a>
+        {% if topic.created_at %}
+        <span class="meta">{{ topic.created_at.strftime("%Y-%m-%d") }}</span>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="empty">No topics yet. <a href="/topics/new">Create one</a>.</p>
+{% endif %}
+{% endblock %}
