@@ -75,6 +75,7 @@ a {
 }
 
 .form input[type="text"],
+.form select,
 .form textarea {
     width: 100%;
     margin-top: 0.25rem;

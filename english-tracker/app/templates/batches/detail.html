@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ batch.name }} — {{ topic.title }}{% endblock %}
+
+{% block content %}
+<p class="meta"><a href="/topics/{{ topic.id }}">{{ topic.title }}</a></p>
+<h1>{{ batch.name }}</h1>
+<p class="meta">
+    Status: {{ batch.status or "—" }}
+    {% if batch.created_at %} · Created {{ batch.created_at.strftime("%Y-%m-%d %H:%M") }}{% endif %}
+</p>
+
+<p>
+    <a href="/topics/{{ topic.id }}/batches/{{ batch.id }}/edit" class="btn">Edit</a>
+    <a href="/topics/{{ topic.id }}" class="btn-secondary">Back to topic</a>
+</p>
+
+<section>
+    <h2>Content</h2>
+    {% if batch.content %}
+    <pre class="content">{{ batch.content }}</pre>
+    {% else %}
+    <p class="empty">No content yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

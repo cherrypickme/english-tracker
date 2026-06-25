@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{% if batch %}Edit{% else %}New{% endif %} Batch — {{ topic.title }}{% endblock %}
+
+{% block content %}
+<p class="meta"><a href="/topics/{{ topic.id }}">{{ topic.title }}</a></p>
+<h1>{% if batch %}Edit batch{% else %}New batch{% endif %}</h1>
+
+<form method="post" action="{{ form_action }}" class="form">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="{{ batch.name if batch else '' }}" required>
+
+    <label for="status">Status</label>
+    <select id="status" name="status">
+        {% for s in statuses %}
+        <option value="{{ s }}" {% if batch and batch.status == s %}selected{% elif not batch and s == 'draft' %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="content">Content</label>
+    <textarea id="content" name="content" rows="12">{{ batch.content if batch and batch.content else '' }}</textarea>
+
+    <div class="form-actions">
+        <button type="submit" class="btn">Save</button>
+        {% if batch %}
+        <a href="/topics/{{ topic.id }}/batches/{{ batch.id }}" class="btn-secondary">Cancel</a>
+        {% else %}
+        <a href="/topics/{{ topic.id }}" class="btn-secondary">Cancel</a>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

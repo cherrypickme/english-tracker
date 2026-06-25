@@ -8,10 +8,10 @@ Implemented:
 
 - SQLite database with Topic, Batch, and Review models
 - Topic CRUD (list, create, view, edit)
+- Batch CRUD under topics (list, create, view, edit)
 
 Not yet implemented:
 
-- Batch CRUD
 - Practice view
 - Spaced repetition (SRS)
 
@@ -52,6 +52,11 @@ The SQLite database is created automatically at `data/app.db` on first startup.
 | GET | `/topics/{id}` | Topic detail |
 | GET | `/topics/{id}/edit` | Edit topic form |
 | POST | `/topics/{id}/edit` | Update topic |
+| GET | `/topics/{id}/batches/new` | New batch form |
+| POST | `/topics/{id}/batches/new` | Create batch |
+| GET | `/topics/{id}/batches/{batch_id}` | Batch detail |
+| GET | `/topics/{id}/batches/{batch_id}/edit` | Edit batch form |
+| POST | `/topics/{id}/batches/{batch_id}/edit` | Update batch |
 | GET | `/health` | Health check |
 
 ## Project structure
@@ -63,9 +68,11 @@ english-tracker/
 │   ├── database.py          # Engine, session, get_db
 │   ├── models.py            # Topic, Batch, Review
 │   ├── routes/
-│   │   └── topics.py        # Topic pages
+│   │   ├── topics.py        # Topic pages
+│   │   └── batches.py       # Batch pages
 │   ├── services/
-│   │   └── topics.py        # Topic CRUD logic
+│   │   ├── topics.py        # Topic CRUD logic
+│   │   └── batches.py       # Batch CRUD logic
 │   ├── templates/
 │   └── static/
 ├── data/                    # SQLite DB (gitignored)

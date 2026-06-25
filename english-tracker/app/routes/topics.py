@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from app.database import get_db
+from app.services import batches as batch_service
 from app.services import topics as topic_service
 
 router = APIRouter()
@@ -45,10 +46,11 @@ def topic_detail(request: Request, topic_id: int, db: Session = Depends(get_db))
     topic = topic_service.get_topic(db, topic_id)
     if topic is None:
         raise HTTPException(status_code=404, detail="Topic not found")
+    batches = batch_service.list_batches_for_topic(db, topic_id)
     return templates.TemplateResponse(
         request,
         "topics/detail.html",
-        {"topic": topic},
+        {"topic": topic, "batches": batches},
     )
 
 

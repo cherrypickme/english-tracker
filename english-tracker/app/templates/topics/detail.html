@@ -28,4 +28,21 @@
     <p class="empty">No prompt yet.</p>
     {% endif %}
 </section>
+
+<section>
+    <h2>Batches</h2>
+    <p><a href="/topics/{{ topic.id }}/batches/new" class="btn">New batch</a></p>
+    {% if batches %}
+    <ul class="topic-list">
+        {% for batch in batches %}
+        <li>
+            <a href="/topics/{{ topic.id }}/batches/{{ batch.id }}">{{ batch.name }}</a>
+            <span class="meta">{{ batch.status or "—" }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">No batches yet.</p>
+    {% endif %}
+</section>
 {% endblock %}
